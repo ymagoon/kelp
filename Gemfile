@@ -35,6 +35,20 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'cloudinary'
+gem 'carrierwave', '~> 1.2'
+gem 'figaro'
+gem 'bootstrap-sass'
+gem 'font-awesome-sass'
+gem 'simple_form'
+gem 'autoprefixer-rails'
+gem 'jquery-rails'
+gem 'awesome_print'
+gem 'meta_request'
+gem 'better_errors'
+gem 'rest-client'
+gem 'nokogiri'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
