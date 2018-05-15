@@ -60,3 +60,40 @@ def parse_google_geocode(address_json)
 
   loc_attributes
 end
+
+def set_agency_type(value)
+  case value.upcase
+  when "DC"
+    agency_type = 'Dive Center'
+  when "DDC"
+    agency_type = 'Diamond Dive Center'
+  when "DR"
+    agency_type = 'Dive Resort'
+  when "DS"
+    agency_type = 'Dive School'
+  when "ITC"
+    agency_type = 'Instructor Training Center'
+  when "DITC"
+    agency_type = 'Diamond Instructor Training Center'
+  when "OTPC"
+    agency_type = 'Online Training Partner Center'
+  when "DTPC"
+    agency_type = 'Dive Trophy Partner Center'
+  when "SRC"
+    agency_type = 'Scuba Rangers Club'
+  when "SNO"
+    agency_type = 'Snorkel Club'
+  when "FRD"
+    agency_type = 'Freediving Center'
+  when "TXR"
+    agency_type = 'Technical Extended Range Center'
+  when "MDB"
+    agency_type = 'Ocean Ranger Station (Mission Deep Blue)'
+  when "SSI"
+    agency_type = 'SSI Service Center'
+  else
+    agency_type = ''
+  end
+
+  agency_type
+end
