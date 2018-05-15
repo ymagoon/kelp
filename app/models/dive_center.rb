@@ -1,7 +1,7 @@
 class DiveCenter < ApplicationRecord
   belongs_to :location
-  has_many :dive_center_orgs
-  has_many :dive_training_orgs, through: :dive_center_orgs
+  has_many :agencies
+  has_many :training_organizations, through: :agencies
 
   email_expression = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   url_expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})/

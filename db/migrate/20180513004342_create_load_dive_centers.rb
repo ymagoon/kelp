@@ -5,7 +5,7 @@ class CreateLoadDiveCenters < ActiveRecord::Migration[5.2]
       t.decimal "lat"
       t.decimal "lng"
       t.integer "active_ind", default: 1
-      t.string "agency_type"
+      t.string "dive_center_type"
 
       t.timestamps
     end

@@ -1,6 +1,6 @@
-class CreateDiveTrainingOrgs < ActiveRecord::Migration[5.2]
+class CreateTrainingOrganizations < ActiveRecord::Migration[5.2]
   def change
-    create_table :dive_training_orgs do |t|
+    create_table :training_organizations do |t|
       t.string :long_name
       t.string :short_name, index: true
       t.string :fax
@@ -12,3 +12,4 @@ class CreateDiveTrainingOrgs < ActiveRecord::Migration[5.2]
     end
   end
 end
+

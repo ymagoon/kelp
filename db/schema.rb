@@ -10,20 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_13_004342) do
+ActiveRecord::Schema.define(version: 2018_05_15_134531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "dive_center_orgs", force: :cascade do |t|
+  create_table "agencies", force: :cascade do |t|
     t.integer "store_number", null: false
     t.bigint "dive_center_id", null: false
-    t.bigint "dive_training_org_id", null: false
+    t.bigint "training_organization_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["dive_center_id"], name: "index_dive_center_orgs_on_dive_center_id"
-    t.index ["dive_training_org_id"], name: "index_dive_center_orgs_on_dive_training_org_id"
-    t.index ["store_number"], name: "index_dive_center_orgs_on_store_number"
+    t.index ["dive_center_id"], name: "index_agencies_on_dive_center_id"
+    t.index ["store_number"], name: "index_agencies_on_store_number"
+    t.index ["training_organization_id"], name: "index_agencies_on_training_organization_id"
   end
 
   create_table "dive_centers", force: :cascade do |t|
@@ -49,26 +49,12 @@ ActiveRecord::Schema.define(version: 2018_05_13_004342) do
     t.index ["name"], name: "index_dive_centers_on_name"
   end
 
-  create_table "dive_training_orgs", force: :cascade do |t|
-    t.string "long_name"
-    t.string "short_name"
-    t.string "fax"
-    t.string "primary_phone"
-    t.string "website"
-    t.string "email"
-    t.bigint "location_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["location_id"], name: "index_dive_training_orgs_on_location_id"
-    t.index ["short_name"], name: "index_dive_training_orgs_on_short_name"
-  end
-
   create_table "load_dive_centers", force: :cascade do |t|
     t.integer "store_number", null: false
     t.decimal "lat"
     t.decimal "lng"
     t.integer "active_ind", default: 1
-    t.string "agency_type"
+    t.string "dive_center_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["store_number"], name: "index_load_dive_centers_on_store_number"
@@ -87,11 +73,26 @@ ActiveRecord::Schema.define(version: 2018_05_13_004342) do
     t.string "source", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["city"], name: "index_locations_on_city"
     t.index ["country"], name: "index_locations_on_country"
   end
 
-  add_foreign_key "dive_center_orgs", "dive_centers"
-  add_foreign_key "dive_center_orgs", "dive_training_orgs"
+  create_table "training_organizations", force: :cascade do |t|
+    t.string "long_name"
+    t.string "short_name"
+    t.string "fax"
+    t.string "primary_phone"
+    t.string "website"
+    t.string "email"
+    t.bigint "location_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_training_organizations_on_location_id"
+    t.index ["short_name"], name: "index_training_organizations_on_short_name"
+  end
+
+  add_foreign_key "agencies", "dive_centers"
+  add_foreign_key "agencies", "training_organizations"
   add_foreign_key "dive_centers", "locations"
-  add_foreign_key "dive_training_orgs", "locations"
+  add_foreign_key "training_organizations", "locations"
 end

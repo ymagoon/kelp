@@ -1,10 +1,11 @@
+# This script takes all of the data from load_dive_centers and loops through it to populate dive_centers
+# All active dive centers that still need to be loaded into dive_centers will have active_ind = 1
 def populate_ssi_dive_centers
-  # All active dive centers that still need to be loaded into dive_centers will have active_ind = 1
   load_dive_centers = LoadDiveCenter.where(active_ind: 1)
-  agency = DiveTrainingOrg.find_by(short_name: 'SSI')
+  training_org = TrainingOrganization.find_by(short_name: 'SSI')
 
   load_dive_centers.each do |dc|
-    dco_attributes = { store_number: dc.store_number, dive_training_org: agency }
+    dco_attributes = { store_number: dc.store_number, training_organization: training_org }
     loc_attributes = {}
 
     puts 'scraping DC....'
@@ -30,7 +31,7 @@ def populate_ssi_dive_centers
     dco_attributes[:dive_center] = DiveCenter.create!(dc_hash)
 
     puts 'creating dco...'
-    dco = DiveCenterOrg.create!(dco_attributes)
+    dco = Agency.create!(dco_attributes)
 
     puts 'updating load_dive_center...'
 

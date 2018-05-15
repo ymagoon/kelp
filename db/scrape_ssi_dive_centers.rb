@@ -1,3 +1,5 @@
+# This scrape was very messy due to a horribly formatted SSI website. I'll try to explain
+# what I'm doing the best I can.
 def scrape_ssi_dive_centers(store_number)
   url = "https://my.divessi.com/show/#{store_number}"
 
@@ -5,15 +7,13 @@ def scrape_ssi_dive_centers(store_number)
   data = Nokogiri::HTML(RestClient.get(url))
   puts 'got data..'
 
-  # This scrape was very messy due to a horribly formatted SSI website. I'll try to explain what I'm doing the
-  # best I can.
-
   name = data.search('.well h3[align="center"]').text
 
   dc_data = data.search('.col-xs-12')[0].text.gsub(/\t/,'').split(/\n/).select { |data| !data.empty? }
 
-  # There is no easy way to extract all URL information cleanly, so the only solution I could come up with is to
-  # pull ALL URL's at once. This includes website, fb, twitter, youtube, etc links
+  # There is no easy way to extract all URL information cleanly, so the only solution I
+  # could come up with is to pull ALL URL's at once. This includes website, fb, twitter,
+  # youtube, etc links
   urls = dc_data.grep(URL_EXPRESSION) { |url| url.match(URL_EXPRESSION)[0] }
 
   # With urls (array), we can now search through it for fb, twitter and youtube links
@@ -30,9 +30,10 @@ def scrape_ssi_dive_centers(store_number)
 
   email = dc_data.select { |email| email =~ EMAIL_EXPRESSION }[0] # take first email
 
-  # Phone numbers were very difficult based on the formatting of the phone number itself, but also because of
-  # how they were presented on the website. Grep is finding the POSITION of either Phone Fax or Mobile and
-  # applying the block to it to clean it by removing all spaces and weird characters.
+  # Phone numbers were very difficult based on the formatting of the phone number itself, but
+  # also because of how they were presented on the website. Grep is finding the POSITION of
+  # either Phone Fax or Mobile and applying the block to it to clean it by removing all spaces
+  # and weird characters.
   uncleaned_phones = dc_data.grep(/(Phone|Fax|Mobile)/) { |phone| phone.gsub(/[\s\.\(\)]/,'') }[0]
 
   # Calling extract_number will actually pull the number from the text

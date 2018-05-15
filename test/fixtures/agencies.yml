@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  store_number: 1
+  dive_center: one
+  training_organization: one
+
+two:
+  store_number: 1
+  dive_center: two
+  training_organization: two

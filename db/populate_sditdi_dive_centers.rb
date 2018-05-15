@@ -1,12 +1,10 @@
+# Load all SDI dive centers from a file, clean them and them load them into the dive_centers
 def populate_sditdi_dive_centers
-  # Load all SDI dive centers from a file, clean them and them load them into the dive_centers DB
-  dir = File.dirname(__FILE__)
-  raw_json = File.open(File.join(dir, "seeds/sdi_dive_centers.json")).read
-  parsed_json = JSON.parse(raw_json)
+  json = open_parse_json('seeds/sdi_dive_centers.json')
 
-  agency = DiveTrainingOrg.find_by(short_name: 'SDI')
+  agency = TrainingOrganization.find_by(short_name: 'SDI')
 
-  parsed_json.each_value do |center|
+  json.each_value do |center|
     dc_attributes = {}
     loc_attributes = {}
 
@@ -42,9 +40,9 @@ def populate_sditdi_dive_centers
     puts "creating dive center..."
     dive_center = DiveCenter.create(dc_attributes)
 
-    puts "creating dive center org..."
-    DiveCenterOrg.create(store_number: center['id'],
-                         dive_training_org: agency,
-                         dive_center: dive_center)
+    puts "creating agency..."
+    Agency.create(store_number: center['id'],
+                  training_organization: agency,
+                  dive_center: dive_center)
   end
 end

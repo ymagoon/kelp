@@ -61,39 +61,47 @@ def parse_google_geocode(address_json)
   loc_attributes
 end
 
-def set_agency_type(value)
+def set_dive_center_type(value)
   case value.upcase
   when "DC"
-    agency_type = 'Dive Center'
+    dive_center_type = 'Dive Center'
   when "DDC"
-    agency_type = 'Diamond Dive Center'
+    dive_center_type = 'Diamond Dive Center'
   when "DR"
-    agency_type = 'Dive Resort'
+    dive_center_type = 'Dive Resort'
   when "DS"
-    agency_type = 'Dive School'
+    dive_center_type = 'Dive School'
   when "ITC"
-    agency_type = 'Instructor Training Center'
+    dive_center_type = 'Instructor Training Center'
   when "DITC"
-    agency_type = 'Diamond Instructor Training Center'
+    dive_center_type = 'Diamond Instructor Training Center'
   when "OTPC"
-    agency_type = 'Online Training Partner Center'
+    dive_center_type = 'Online Training Partner Center'
   when "DTPC"
-    agency_type = 'Dive Trophy Partner Center'
+    dive_center_type = 'Dive Trophy Partner Center'
   when "SRC"
-    agency_type = 'Scuba Rangers Club'
+    dive_center_type = 'Scuba Rangers Club'
   when "SNO"
-    agency_type = 'Snorkel Club'
+    dive_center_type = 'Snorkel Club'
   when "FRD"
-    agency_type = 'Freediving Center'
+    dive_center_type = 'Freediving Center'
   when "TXR"
-    agency_type = 'Technical Extended Range Center'
+    dive_center_type = 'Technical Extended Range Center'
   when "MDB"
-    agency_type = 'Ocean Ranger Station (Mission Deep Blue)'
+    dive_center_type = 'Ocean Ranger Station (Mission Deep Blue)'
   when "SSI"
-    agency_type = 'SSI Service Center'
+    dive_center_type = 'SSI Service Center'
   else
-    agency_type = ''
+    dive_center_type = ''
   end
 
-  agency_type
+  dive_center_type
+end
+
+def open_parse_json(file_path)
+  dir = File.dirname(__FILE__)
+  raw_json = File.open(File.join(dir, file_path)).read
+  parsed_json = JSON.parse(raw_json)
+
+  parsed_json
 end
