@@ -1,4 +1,4 @@
-require_relative 'populate_dive_training_orgs.rb'
+require_relative 'populate_dive_training_orgs'
 require_relative 'populate_sditdi_dive_centers'
 require_relative 'helper'
 
