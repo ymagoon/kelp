@@ -22,8 +22,41 @@ end
 
 def find_address(lat, lng)
   base_url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='
-  url = "#{base_url}#{lat},#{lng}&key=#{api_key}"
+  url = "#{base_url}#{lat},#{lng}&key=#{ENV["google_geocode_key"]}"
 
   parsed_json = JSON.parse(RestClient.get(url))
   parsed_json
+end
+
+def parse_google_geocode(address_json)
+  if address_json['status'] == "OK"
+    loc_attributes[:google_place_id] = address_json['results'][0]['place_id']
+
+    address_json['results'][0]['address_components'].each do |component|
+      if component['types'].include?('street_number')
+        street_num = component['short_name'] || ''
+        street_num.strip!
+        loc_attributes[:address_1] = street_num unless street_num == 'Unnamed Road'
+        loc_attributes[:address_1] = '' if loc_attributes[:address_1] = 'Unnamed Road'
+      elsif component['types'].include?('route')
+        if loc_attributes[:address_1].nil?
+          loc_attributes[:address_1] = "#{component['long_name']}"
+        else
+          loc_attributes[:address_1] = "#{loc_attributes[:address_1]} #{component['long_name']}"
+        end
+      elsif component['types'].include?('locality')
+        loc_attributes[:city] = component['long_name']
+      elsif component['types'].include?('administrative_area_level_1')
+        loc_attributes[:state] = component['long_name']
+      elsif component['types'].include?('country')
+        loc_attributes[:country] = component['long_name']
+      elsif component['types'].include?('postal_code')
+        loc_attributes[:postal_code] = component['short_name']
+      end
+    end
+  else
+    puts 'Could not find address'
+  end
+
+  loc_attributes
 end
