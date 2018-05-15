@@ -1,5 +1,5 @@
 class DiveTrainingOrg < ApplicationRecord
-  belongs_to :location, dependent: :destroy
+  belongs_to :location
   has_many :dive_center_orgs
   has_many :dive_centers, through: :dive_center_orgs
 
