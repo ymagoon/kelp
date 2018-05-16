@@ -13,6 +13,9 @@ def populate_ssi_dive_centers
     puts 'scraping DC....'
     dc_hash = scrape_ssi_dive_centers(dc.store_number)
 
+    # dc_hash will return false or a hash. If it returns false we skip this iteration.
+    next unless dc_hash
+
     dc_hash[:dive_center_type] = set_dive_center_type(dc.dive_center_type)
 
     puts 'finding address...'
@@ -25,6 +28,12 @@ def populate_ssi_dive_centers
     elsif address_json[1] == 'OVER_QUERY_LIMIT'
       puts 'over query limit for google geocode api...'
       break
+    elsif address_json[1] == 'ZERO_RESULTS'
+      puts 'no results found...'
+      next
+    else
+      puts 'something didnt work here, so we wont do anything'
+      next
     end
 
     loc_attributes[:lat] = dc.lat

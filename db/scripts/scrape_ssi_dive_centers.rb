@@ -7,8 +7,11 @@ def scrape_ssi_dive_centers(store_number)
   data = Nokogiri::HTML(RestClient.get(url))
   puts 'got data..'
 
-# if the DC does not exist then this will error - TODO
-  name = data.search('.well h3[align="center"]').text
+  unless data.search('.well h3[align="center"]').empty?
+    name = data.search('.well h3[align="center"]').text
+  else
+    return false
+  end
 
   dc_data = data.search('.col-xs-12')[0].text.gsub(/\t/,'').split(/\n/).select { |data| !data.empty? }
 
