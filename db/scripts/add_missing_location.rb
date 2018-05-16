@@ -1,3 +1,8 @@
+# This was *going* to be used to update locations of dive_centers where the google_geocode
+# API failed due to a max quota. However, I ended up running the scrape for the location
+# over two days so I didn't hit the quota, so I never actually fully tested this script.
+# It did update *every* single
+
 def add_missing_location
   dive_centers = DiveCenter.all.select { |dc| dc.location.country == nil }
 

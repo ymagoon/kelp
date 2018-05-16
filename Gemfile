@@ -49,6 +49,7 @@ gem 'better_errors'
 gem 'rest-client'
 gem 'nokogiri'
 gem 'json'
+gem 'pry-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

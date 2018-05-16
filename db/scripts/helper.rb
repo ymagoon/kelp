@@ -1,3 +1,5 @@
+require 'pry'
+
 EMAIL_EXPRESSION = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 URL_EXPRESSION = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})/
 
@@ -35,11 +37,10 @@ end
 def parse_google_geocode(address_json)
   loc_attributes = {}
   status = 'OK'
-
   # if address_json['status'] == 'OK'
-    loc_attributes[:google_place_id] = address_json['results'][0]['place_id']
+    loc_attributes[:google_place_id] = address_json[0]['results'][0]['place_id']
 
-    address_json['results'][0]['address_components'].each do |component|
+    address_json[0]['results'][0]['address_components'].each do |component|
       if component['types'].include?('street_number')
         street_num = component['short_name'] || ''
         street_num.strip!
