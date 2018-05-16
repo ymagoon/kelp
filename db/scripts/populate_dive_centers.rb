@@ -1,7 +1,7 @@
 # Populates dive_centers with all dive centers in a json file called dive_centers.json
 # This file can contain dive centers from all TrainingOrganizations
 def populate_dive_centers
-  json = open_parse_json('seeds/dive_centers.json')
+  json = open_parse_json('../data/dive_centers.json')
 
   size = json.size
   json.each_with_index do |dc, index|
@@ -22,7 +22,7 @@ def populate_dive_centers
     dive_center[:linkedin] = dc['linkedin']
     dive_center[:blog] = dc['blog']
     dive_center[:project_aware] = dc['project_aware']
-    dive_center[:agency_type] = dc['agency_type']
+    dive_center[:dive_center_type] = dc['agency_type']
     dive_center[:location] = Location.new(source: 'seed') # fix
 
     dive_center = DiveCenter.create!(dive_center)

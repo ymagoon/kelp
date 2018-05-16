@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2018_05_15_134531) do
     t.string "linkedin", default: ""
     t.string "blog", default: ""
     t.string "project_aware", default: ""
-    t.string "agency_type"
+    t.string "dive_center_type"
     t.bigint "location_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

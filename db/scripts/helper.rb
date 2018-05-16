@@ -29,6 +29,7 @@ def find_address(lat, lng)
 end
 
 def parse_google_geocode(address_json)
+  loc_attributes = {}
   if address_json['status'] == "OK"
     loc_attributes[:google_place_id] = address_json['results'][0]['place_id']
 

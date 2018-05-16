@@ -11,7 +11,7 @@
 # by loading in each countries' latlng parameters
 def populate_load_dive_centers(type)
   if type == 'scrape'
-    countries = open_parse_json('seeds/countries.json')
+    countries = open_parse_json('../data/countries.json')
     base_url = "https://my.divessi.com/code/geo/dc.json.php?"
 
     i = 1
@@ -31,7 +31,7 @@ def populate_load_dive_centers(type)
       i += 1
     end
   elsif type == 'file'
-    json = open_parse_json('seeds/load_dive_centers.json')
+    json = open_parse_json('../data/load_dive_centers.json')
     size = json.size
 
     json.each_with_index do |dc, index|

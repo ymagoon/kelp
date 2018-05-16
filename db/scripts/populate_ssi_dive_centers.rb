@@ -4,21 +4,24 @@ def populate_ssi_dive_centers
   load_dive_centers = LoadDiveCenter.where(active_ind: 1)
   training_org = TrainingOrganization.find_by(short_name: 'SSI')
 
-  load_dive_centers.each do |dc|
+  size = load_dive_centers.size
+
+  load_dive_centers.each_with_index do |dc, index|
+    puts "#{index} of #{size} dc #{dc.store_number}..."
     dco_attributes = { store_number: dc.store_number, training_organization: training_org }
-    loc_attributes = {}
 
     puts 'scraping DC....'
     dc_hash = scrape_ssi_dive_centers(dc.store_number)
 
-    dc_hash[:agency_type] = set_agency_type(dc.agency_type)
+    dc_hash[:dive_center_type] = set_dive_center_type(dc.dive_center_type)
 
     puts 'finding address...'
+
+    address_json = find_address(dc.lat, dc.lng)
+    loc_attributes = parse_google_geocode(address_json)
+
     loc_attributes[:lat] = dc.lat
     loc_attributes[:lng] = dc.lng
-
-    address_json = find_address(loc_attributes[:lat], loc_attributes[:lng])
-    loc_attributes = parse_google_geocode(address_json)
 
     puts 'creating location...'
     loc_attributes[:source] = 'SSI'

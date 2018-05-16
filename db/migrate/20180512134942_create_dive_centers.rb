@@ -15,7 +15,7 @@ class CreateDiveCenters < ActiveRecord::Migration[5.2]
       t.string :linkedin, default: ''
       t.string :blog, default: ''
       t.string :project_aware, default: ''
-      t.string :agency_type
+      t.string :dive_center_type
       t.references :location, foreign_key: true, null: false, index: true
       t.timestamps
     end

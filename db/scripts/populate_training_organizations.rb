@@ -1,7 +1,7 @@
 # Load all of the organizations that provide licensing for diving and load
 # them into dive_training_orgs
 def populate_training_organizations
-  json = open_parse_json('seeds/dive_training_orgs.json')
+  json = open_parse_json('../data/dive_training_orgs.json')
 
   json.each do |short_name, org|
     loc = Location.create(address_1: "#{org['street_number'] } #{org['street_short_name']}",
