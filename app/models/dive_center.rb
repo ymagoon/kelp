@@ -9,4 +9,25 @@ class DiveCenter < ApplicationRecord
   validates :name, presence: true
   validates :website, :fb, :twitter, :youtube, :google, :linkedin, :blog, allow_blank: true, format: { with: url_expression }
   validates :email, allow_blank: true, format: { with: email_expression }
+
+  def ssi?
+    agencies = self.training_organizations
+    agencies.each { |agency| return true if agency.short_name == 'SSI' }
+
+    return false
+  end
+
+  def sdi?
+    agencies = self.training_organizations
+    agencies.each { |agency| return true if agency.short_name == 'SDI' }
+
+    return false
+  end
+
+  def padi?
+    agencies = self.training_organizations
+    agencies.each { |agency| return true if agency.short_name == 'PADI' }
+
+    return false
+  end
 end

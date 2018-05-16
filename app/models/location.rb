@@ -3,13 +3,9 @@ class Location < ApplicationRecord
   belongs_to :dive_center, optional: true
 
   def self.missing_details
-    locations = Location.all
-
-    details = locations.select do |loc|
+    Location.all.select do |loc|
       loc.address_1 == nil || loc.city == nil || loc.state == nil || loc.country == nil || loc.postal_code == nil
     end
-
-    details
   end
 
   def self.missing_address_1
