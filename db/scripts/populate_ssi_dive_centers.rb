@@ -21,7 +21,7 @@ def populate_ssi_dive_centers
 
     # Added to ensure I'm not adding shit addresses to the DB
     if address_json[1] == 'OK'
-      loc_attributes = parse_google_geocode(address_json)
+      loc_attributes = parse_google_geocode(address_json[0])
     elsif address_json[1] == 'OVER_QUERY_LIMIT'
       puts 'over query limit for google geocode api...'
       break
