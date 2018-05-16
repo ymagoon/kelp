@@ -23,14 +23,20 @@ end
 def find_address(lat, lng)
   base_url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='
   url = "#{base_url}#{lat},#{lng}&key=#{ENV["google_geocode_key"]}"
+  response = []
 
   parsed_json = JSON.parse(RestClient.get(url))
-  parsed_json
+  response[0] = parsed_json
+  response[1] = parsed_json['status']
+
+  response
 end
 
 def parse_google_geocode(address_json)
   loc_attributes = {}
-  if address_json['status'] == "OK"
+  status = 'OK'
+
+  # if address_json['status'] == 'OK'
     loc_attributes[:google_place_id] = address_json['results'][0]['place_id']
 
     address_json['results'][0]['address_components'].each do |component|
@@ -55,9 +61,9 @@ def parse_google_geocode(address_json)
         loc_attributes[:postal_code] = component['short_name']
       end
     end
-  else
-    puts 'Could not find address'
-  end
+  # elsif address_json['status'] == "OVER_QUERY_LIMIT"
+  #   status = 'FAIL'
+  # end
 
   loc_attributes
 end
