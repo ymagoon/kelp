@@ -2,7 +2,7 @@ class Location < ApplicationRecord
   belongs_to :training_organization, optional: true
   belongs_to :dive_center, optional: true
 
-  searchkick
+  # searchkick
 
   def self.missing_details
     Location.all.select do |loc|
