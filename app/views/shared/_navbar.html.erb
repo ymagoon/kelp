@@ -1,3 +1,38 @@
+<div class="navbar">
+  <div class="navbar-content">
+    <%= link_to root_path do %>
+      <p class="logo">K</p>
+    <% end %>
+
+    <%= form_tag '/search', method: 'get', remote: true, :id => 'search' do %>
+      <%= text_field_tag :search, nil, placeholder: 'Discover your next dive destination...' %>
+      <%#= submit_tag("Search") %>
+    <% end %>
+
+    <nav class="navigation">
+      <ul>
+        <li>Destinations</li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+    </nav>
+
+    <div class="actions">
+      <div class="btn btn-secondary">
+        <span>LOGIN</span>
+      </div>
+
+      <div class="btn btn-primary">
+        <span>LOGIN</span>
+      </div>
+
+      <div class="avatar">
+        <%#= image_path %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="navbar-wagon">
   <!-- Logo -->
   <a href="/" class="navbar-wagon-brand">
@@ -36,3 +71,5 @@
     </div>
   </div>
 </div>
+
+
