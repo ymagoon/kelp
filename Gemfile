@@ -50,6 +50,9 @@ gem 'rest-client'
 gem 'nokogiri'
 gem 'json'
 gem 'pry-rails'
+gem 'devise'
+gem 'searchkick'
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

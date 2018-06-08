@@ -10,6 +10,8 @@ class DiveCenter < ApplicationRecord
   validates :website, :fb, :twitter, :youtube, :google, :linkedin, :blog, allow_blank: true, format: { with: url_expression }
   validates :email, allow_blank: true, format: { with: email_expression }
 
+  searchkick
+
   def ssi?
     agencies = self.training_organizations
     agencies.each { |agency| return true if agency.short_name == 'SSI' }

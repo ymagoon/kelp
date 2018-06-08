@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  price: 1
+  currency: MyString
+  course: one
+  dive_center: one
+
+two:
+  price: 1
+  currency: MyString
+  course: two
+  dive_center: two

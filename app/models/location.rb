@@ -2,6 +2,8 @@ class Location < ApplicationRecord
   belongs_to :training_organization, optional: true
   belongs_to :dive_center, optional: true
 
+  searchkick
+
   def self.missing_details
     Location.all.select do |loc|
       loc.address_1 == nil || loc.city == nil || loc.state == nil || loc.country == nil || loc.postal_code == nil
