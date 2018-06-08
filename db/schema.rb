@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_08_004531) do
+ActiveRecord::Schema.define(version: 2018_06_08_070551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(version: 2018_06_08_004531) do
     t.index ["store_number", "training_organization_id"], name: "index_agencies_on_store_number_and_training_organization_id", unique: true
     t.index ["store_number"], name: "index_agencies_on_store_number"
     t.index ["training_organization_id"], name: "index_agencies_on_training_organization_id"
+  end
+
+  create_table "agency_twos", force: :cascade do |t|
+    t.integer "store_number", null: false
+    t.bigint "dc_two_id", null: false
+    t.bigint "training_organization_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dc_two_id"], name: "index_agency_twos_on_dc_two_id"
+    t.index ["training_organization_id"], name: "index_agency_twos_on_training_organization_id"
   end
 
   create_table "answers", force: :cascade do |t|
@@ -54,6 +64,29 @@ ActiveRecord::Schema.define(version: 2018_06_08_004531) do
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_dc_courses_on_course_id"
     t.index ["dive_center_id"], name: "index_dc_courses_on_dive_center_id"
+  end
+
+  create_table "dc_twos", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "primary_phone", default: ""
+    t.string "mobile_phone", default: ""
+    t.string "website", default: ""
+    t.string "email", default: ""
+    t.string "fax", default: ""
+    t.string "tripadvisor", default: ""
+    t.string "fb", default: ""
+    t.string "twitter", default: ""
+    t.string "youtube", default: ""
+    t.string "google", default: ""
+    t.string "linkedin", default: ""
+    t.string "blog", default: ""
+    t.string "project_aware", default: ""
+    t.string "dive_center_type"
+    t.bigint "location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_dc_twos_on_location_id"
+    t.index ["name"], name: "index_dc_twos_on_name"
   end
 
   create_table "dive_centers", force: :cascade do |t|
@@ -211,11 +244,14 @@ ActiveRecord::Schema.define(version: 2018_06_08_004531) do
 
   add_foreign_key "agencies", "dive_centers"
   add_foreign_key "agencies", "training_organizations"
+  add_foreign_key "agency_twos", "dc_twos"
+  add_foreign_key "agency_twos", "training_organizations"
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "courses", "training_organizations"
   add_foreign_key "dc_courses", "courses"
   add_foreign_key "dc_courses", "dive_centers"
+  add_foreign_key "dc_twos", "locations"
   add_foreign_key "dive_centers", "locations"
   add_foreign_key "questions", "dive_centers"
   add_foreign_key "questions", "users"
