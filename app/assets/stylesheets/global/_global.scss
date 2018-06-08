@@ -1,9 +1,42 @@
-// btn-secondary
+/* Standard Buttons */
+.btn {
+  height: 30px;
+  border-radius: 2px;
 
-// btn-primary
+  a {
+    font-size: 11px;
+    font-weight: 600;
+    font-family: "Helvetica";
+    color: white;
+  }
+}
 
-// avatar
+.btn-secondary {
+  border: 1px solid $border-gray;
 
+  a {
+    color: black;
+  }
+
+  &:hover {
+    background-color: $border-gray;
+  }
+}
+
+.btn-main {
+  background-color: $main;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+/* Links */
+a {
+  color: $medium-gray;
+  font-size: 14px;
+}
 a:hover {
+  color: $main;
   text-decoration: none;
 }

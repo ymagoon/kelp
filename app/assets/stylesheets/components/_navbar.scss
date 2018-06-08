@@ -26,12 +26,25 @@
       #k {
         color: white;
         font-size: 2em;
-        // margin-bottom: 0;
       }
     }
+
+    #search {
+      padding-left: 5px;
+      font-weight: lighter;
+      width: 300px;
+      height: 35px;
+      border-radius: 2px;
+      border: 1px solid $border-gray;
+    }
+
+
+    .navigation-item {
+      padding: 0 20px;
+    }
   }
-  // justify-content: space-between;
 }
+
 
 /* Logo */
 .navbar-wagon-brand img {
@@ -50,22 +63,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-/* Basic navbar item */
-.navbar-wagon-item {
-  cursor: pointer;
-  padding: 0 20px;
-}
-
-/* Navbar link */
-.navbar-wagon-link {
-  color: #616668;
-  font-size: 14px;
-}
-.navbar-wagon-link:hover {
-  color: #da552f;
-  text-decoration: none;
 }
 
 /* Dropdown menu */

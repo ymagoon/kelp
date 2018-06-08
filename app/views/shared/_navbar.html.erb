@@ -6,17 +6,40 @@
      </div>
     <% end %>
 
-    <%= form_tag '/search', method: 'get', remote: true, :id => 'search' do %>
-      <%= text_field_tag(:search) %>
+    <%= form_tag '/search', method: 'get', remote: true, class: 'search' do %>
+      <%= text_field_tag :search, nil, placeholder: 'Discover your next dive destination...' %>
       <%#= submit_tag("Search") %>
     <% end %>
 
     <!-- Right Navigation -->
     <div class="navbar-wagon-right hidden-xs hidden-sm">
+      <%= link_to 'Destinations', '#', class: 'navigation-item' %>
+      <%= link_to 'About', '#', class: 'navigation-item' %>
+      <%= link_to 'Contact', '#', class: 'navigation-item' %>
 
-      <a href="" class="navbar-wagon-item navbar-wagon-link">Destinations</a>
-      <a href="" class="navbar-wagon-item navbar-wagon-link">About</a>
-      <a href="" class="navbar-wagon-item navbar-wagon-link">Contact</a>
+      <% unless user_signed_in? %>
+        <div class="btn btn-secondary">
+          <%= link_to 'LOGIN', new_user_session_path %>
+        </div>
+
+        <div class="btn btn-main">
+          <%= link_to 'SIGNUP', new_user_registration_path %>
+        </div>
+
+      <% else %>
+
+
+
+
+
+
+
+
+
+
+
+
+      <% end %>
 
 
 
@@ -47,4 +70,12 @@
   </div>
 </div>
 
+<!--   <div class="nav-button">
+    <%# if !current_user.nil? %>
+      <%#= link_to destroy_user_session_path, method: :delete do %>
+        <i class="fas fa-sign-out-alt"></i>
+        <p>Logout</p>
+        <%# end %>
+      <%# end %>
+  </div> -->
 
