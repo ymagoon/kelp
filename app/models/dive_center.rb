@@ -8,9 +8,10 @@ class DiveCenter < ApplicationRecord
 
   validates :name, presence: true
   validates :website, :fb, :twitter, :youtube, :google, :linkedin, allow_blank: true, format: { with: url_expression }
+  validates :fb, :twitter, :youtube, :google, :linkedin, allow_blank: true, format: { with: url_expression }
   validates :email, allow_blank: true, format: { with: email_expression }
 
-  # searchkick
+  searchkick
 
   def ssi?
     agencies = self.training_organizations
