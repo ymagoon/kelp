@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_08_001729) do
+ActiveRecord::Schema.define(version: 2018_06_08_004531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,19 @@ ActiveRecord::Schema.define(version: 2018_06_08_001729) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dive_center_id"], name: "index_agencies_on_dive_center_id"
+    t.index ["store_number", "training_organization_id"], name: "index_agencies_on_store_number_and_training_organization_id", unique: true
     t.index ["store_number"], name: "index_agencies_on_store_number"
     t.index ["training_organization_id"], name: "index_agencies_on_training_organization_id"
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.string "answer", null: false
+    t.bigint "question_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -64,6 +75,16 @@ ActiveRecord::Schema.define(version: 2018_06_08_001729) do
     t.bigint "location_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "hours_of_operation"
+    t.boolean "rent_equipment"
+    t.boolean "rent_camera"
+    t.boolean "nitrox"
+    t.boolean "rent_computer"
+    t.boolean "lodging"
+    t.boolean "restaurant"
+    t.boolean "bar"
+    t.boolean "transfers"
+    t.boolean "pool"
     t.index ["location_id"], name: "index_dive_centers_on_location_id"
     t.index ["name"], name: "index_dive_centers_on_name"
   end
@@ -96,6 +117,34 @@ ActiveRecord::Schema.define(version: 2018_06_08_001729) do
     t.index ["country"], name: "index_locations_on_country"
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.string "question", null: false
+    t.bigint "user_id"
+    t.bigint "dive_center_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dive_center_id"], name: "index_questions_on_dive_center_id"
+    t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "feedback"
+    t.integer "staff", null: false
+    t.integer "boat", null: false
+    t.integer "safety", null: false
+    t.integer "facilities", null: false
+    t.integer "rental_equipment", null: false
+    t.integer "eco_friendly", null: false
+    t.integer "logistics", null: false
+    t.float "overall"
+    t.bigint "dive_center_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dive_center_id"], name: "index_reviews_on_dive_center_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "training_organizations", force: :cascade do |t|
     t.string "long_name"
     t.string "short_name"
@@ -108,6 +157,32 @@ ActiveRecord::Schema.define(version: 2018_06_08_001729) do
     t.datetime "updated_at", null: false
     t.index ["location_id"], name: "index_training_organizations_on_location_id"
     t.index ["short_name"], name: "index_training_organizations_on_short_name"
+  end
+
+  create_table "user_favorites", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "dive_center_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dive_center_id"], name: "index_user_favorites_on_dive_center_id"
+    t.index ["user_id"], name: "index_user_favorites_on_user_id"
+  end
+
+  create_table "user_histories", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "dive_center_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dive_center_id"], name: "index_user_histories_on_dive_center_id"
+    t.index ["user_id"], name: "index_user_histories_on_user_id"
+  end
+
+  create_table "user_searches", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "search_string", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_searches_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -123,15 +198,33 @@ ActiveRecord::Schema.define(version: 2018_06_08_001729) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "full_name"
+    t.string "username"
+    t.string "phone"
+    t.bigint "location_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["location_id"], name: "index_users_on_location_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "agencies", "dive_centers"
   add_foreign_key "agencies", "training_organizations"
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "users"
   add_foreign_key "courses", "training_organizations"
   add_foreign_key "dc_courses", "courses"
   add_foreign_key "dc_courses", "dive_centers"
   add_foreign_key "dive_centers", "locations"
+  add_foreign_key "questions", "dive_centers"
+  add_foreign_key "questions", "users"
+  add_foreign_key "reviews", "users"
   add_foreign_key "training_organizations", "locations"
+  add_foreign_key "user_favorites", "dive_centers"
+  add_foreign_key "user_favorites", "users"
+  add_foreign_key "user_histories", "dive_centers"
+  add_foreign_key "user_histories", "users"
+  add_foreign_key "user_searches", "users"
+  add_foreign_key "users", "locations"
 end
