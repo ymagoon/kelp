@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_15_134531) do
+ActiveRecord::Schema.define(version: 2018_06_08_001729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,25 @@ ActiveRecord::Schema.define(version: 2018_05_15_134531) do
     t.index ["dive_center_id"], name: "index_agencies_on_dive_center_id"
     t.index ["store_number"], name: "index_agencies_on_store_number"
     t.index ["training_organization_id"], name: "index_agencies_on_training_organization_id"
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.bigint "training_organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["training_organization_id"], name: "index_courses_on_training_organization_id"
+  end
+
+  create_table "dc_courses", force: :cascade do |t|
+    t.integer "price"
+    t.string "currency"
+    t.bigint "course_id"
+    t.bigint "dive_center_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_dc_courses_on_course_id"
+    t.index ["dive_center_id"], name: "index_dc_courses_on_dive_center_id"
   end
 
   create_table "dive_centers", force: :cascade do |t|
@@ -91,8 +110,28 @@ ActiveRecord::Schema.define(version: 2018_05_15_134531) do
     t.index ["short_name"], name: "index_training_organizations_on_short_name"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
   add_foreign_key "agencies", "dive_centers"
   add_foreign_key "agencies", "training_organizations"
+  add_foreign_key "courses", "training_organizations"
+  add_foreign_key "dc_courses", "courses"
+  add_foreign_key "dc_courses", "dive_centers"
   add_foreign_key "dive_centers", "locations"
   add_foreign_key "training_organizations", "locations"
 end

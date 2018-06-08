@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  feedback: MyString
+  staff: 1
+  boat: 1
+  safety: 1
+  facilities: 1
+  rental_equipment: 1
+  eco_friendly: 1
+  logistics: 1
+  overall: 1.5
+  dive_center: 
+  user: one
+
+two:
+  feedback: MyString
+  staff: 1
+  boat: 1
+  safety: 1
+  facilities: 1
+  rental_equipment: 1
+  eco_friendly: 1
+  logistics: 1
+  overall: 1.5
+  dive_center: 
+  user: two
