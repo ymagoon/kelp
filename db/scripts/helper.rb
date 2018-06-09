@@ -108,3 +108,19 @@ def open_parse_json(file_path)
 
   parsed_json
 end
+
+# This method can be manually run to update all countries, it is by no means efficienct, but it works!
+def update_padi_countries
+  countries = open_parse_json('db/data/countries.json')
+  locations = Location.where(source: 'PADI')
+
+  locations.each do |loc|
+    countries.each do |c|
+      if c['padi']
+        if c['padi'].include? loc.country
+          loc.update(country: c['name']['common'])
+        end
+      end
+    end
+  end
+end
