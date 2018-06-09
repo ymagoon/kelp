@@ -34,7 +34,6 @@ if json['RecordCount'] != 0
       # Create DC
       dc_attributes = {}
       dc_attributes[:location] = loc
-      dc_attributes[:location_id] = 1
       dc_attributes[:name] = dc['StoreName']
       dc_attributes[:primary_phone] = dc['Phone']
       dc_attributes[:website] = dc['Web']

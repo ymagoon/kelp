@@ -1,8 +1,10 @@
 class QueryFilter
-  def initialize(objects, params)
-    @objects = objects
-    @params = params
+  def initialize(params)
+    @locations = Location.all
+    @dive_centers = DiveCenter.all
   end
 
-
+  def search
+    @objects = @objects.where()
+  end
 end

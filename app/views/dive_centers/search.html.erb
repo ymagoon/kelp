@@ -1,0 +1,8 @@
+<% @dive_centers.each do |dc| %>
+  <div class="dive-center">
+    <p><%= dc.name %></p>
+    <% location = dc.location %>
+    <p><%= location.city %></p>
+    <p><%= location.country %></p>
+  </div>
+<% end %>

@@ -10,5 +10,5 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'search', to: 'dive_centers#index', as: :search
+  get 'search', to: 'dive_centers#search'
 end

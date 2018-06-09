@@ -1,9 +1,14 @@
 class DiveCentersController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :autocomplete]
+  skip_before_action :authenticate_user!, only: [:index, :autocomplete, :search]
 
   def index
     search = params[:search].present? ? params[:search] : nil
     @dive_centers = DiveCenter.search(search)
+  end
+
+  def search
+    search_term = params[:search].present? ? params[:search] : nil
+    @dive_centers = DiveCenter.search(search_term)
   end
 
   def show
