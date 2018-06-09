@@ -4,6 +4,14 @@ class Location < ApplicationRecord
 
   searchkick
 
+   def search_data
+    {
+      city: city,
+      state: state,
+      country: country
+    }
+  end
+
   def self.missing_details
     Location.all.select do |loc|
       loc.address_1 == nil || loc.city == nil || loc.state == nil || loc.country == nil || loc.postal_code == nil

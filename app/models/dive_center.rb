@@ -13,6 +13,21 @@ class DiveCenter < ApplicationRecord
 
   searchkick
 
+  def search_data
+    {
+      name: name,
+      dive_center_type: dive_center_type,
+      rent_equipment: rent_equipment,
+      nitrox: nitrox,
+      rent_computer: rent_computer,
+      lodging: lodging,
+      restaurant: restaurant,
+      bar: bar,
+      transfers: transfers,
+      pool: pool
+    }
+  end
+
   def ssi?
     agencies = self.training_organizations
     agencies.each { |agency| return true if agency.short_name == 'SSI' }
