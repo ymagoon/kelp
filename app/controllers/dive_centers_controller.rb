@@ -1,5 +1,5 @@
 class DiveCentersController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :authenticate_user!, only: [:index, :autocomplete]
 
   def index
     search = params[:search].present? ? params[:search] : nil
@@ -10,10 +10,6 @@ class DiveCentersController < ApplicationController
     @dive_center = DiveCenter.find(params[:id])
   end
 
-  def clean_search
-    params[:search] # add regex to remove shit
-  end
-
   def autocomplete
     render json: DiveCenter.search(params[:query], {
       fields: ['name'],
@@ -21,4 +17,13 @@ class DiveCentersController < ApplicationController
       load: false
       }).map(&:name)
   end
+
+  private
+
+
+  def clean_search
+    params.permit(:query)
+    # params[:search] # add regex to remove shit
+  end
+
 end

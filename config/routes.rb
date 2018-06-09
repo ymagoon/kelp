@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
-  resources :dive_center, only: [:index, :show] do
+  resources :dive_centers, only: [:index, :show] do
     collection do
       get :autocomplete
     end

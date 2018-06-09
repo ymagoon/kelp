@@ -3,7 +3,7 @@ $(document).ready(function(){
     datumTokenizer: Bloodhound.tokenizers.whitespace,
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     remote: {
-      url: '/dive_center/autocomplete?query=%QUERY',
+      url: '/dive_centers/autocomplete?query=%QUERY',
       wildcard: '%QUERY'
     }
   });
