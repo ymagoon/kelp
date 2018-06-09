@@ -7,12 +7,13 @@ class DiveCentersController < ApplicationController
   end
 
   def search
-    search_term = params[:search].present? ? clean_search : nil
+    search_term = params[:search].present? ? clean_search : ""
     @dive_centers = DiveCenter.search(search_term)
 
     query = QueryFilter.new(@dive_centers, permit_params)
 
     @dive_centers = query.filter
+    # @locations = query.build_filter(@dive_centers)
   end
 
   def show
