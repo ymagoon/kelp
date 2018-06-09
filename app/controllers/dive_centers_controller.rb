@@ -7,8 +7,12 @@ class DiveCentersController < ApplicationController
   end
 
   def search
-    search_term = params[:search].present? ? params[:search] : nil
+    search_term = params[:search].present? ? clean_search : nil
     @dive_centers = DiveCenter.search(search_term)
+
+    query = QueryFilter.new(@dive_centers, permit_params)
+
+    @dive_centers = query.filter
   end
 
   def show
@@ -25,10 +29,12 @@ class DiveCentersController < ApplicationController
 
   private
 
+  def permit_params
+    params.require(:filter).permit(:agency, :city) unless params[:filter].nil?
+  end
 
   def clean_search
-    params.permit(:query)
-    # params[:search] # add regex to remove shit
+    params[:search].gsub(/[!@#$%^&*()\"\'\,\.\\]/,'')
   end
 
 end
