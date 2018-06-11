@@ -7,7 +7,16 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
+import React from 'react';
+import { render } from 'react-dom';
+
 import 'typeahead';
 import './autocomplete';
+import Testing from './components/hello_react';
+import App from './components/App';
+
+// render(<Testing />, document.querySelector('#dive_center_data'));
+render(<App />, document.querySelector('#test'));
+// import 'hello_react.jsx';
 
 console.log('Hello World from Webpacker')

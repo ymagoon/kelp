@@ -12,7 +12,7 @@ class DiveCentersController < ApplicationController
 
     query = QueryFilter.new(@dive_centers, permit_params)
 
-    @dive_centers = query.filter
+    # @dive_centers = query.filter
     # @locations = query.build_filter(@dive_centers)
   end
 

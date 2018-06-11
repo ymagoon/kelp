@@ -40,12 +40,19 @@
   <% end %>
 </div>
 
+<div id="test"></div>
 
-<% @dive_centers.each do |dc| %>
-  <div class="dive-center">
-    <p><%= dc.name %></p>
-    <% location = dc.location %>
-    <p><%= location.city %></p>
-    <p><%= location.country %></p>
-  </div>
-<% end %>
+<%#= content_tag :div,
+  id: "dive_center_data",
+  data: @dive_centers.to_json do %>
+<%# end %>
+
+
+<%# @dive_centers.each do |dc| %>
+<!--   <div class="dive-center">
+    <p><%#= dc.name %></p>
+    <%# location = dc.location %>
+    <p><%#= location.city %></p>
+    <p><%#= location.country %></p>
+  </div> -->
+<%# end %>
