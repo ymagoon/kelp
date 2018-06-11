@@ -13,12 +13,11 @@ class App extends React.Component {
     }
   };
 
-  addFilter = (filter) => {
-    console.log(filter);
+  addFilter = (filter, value) => {
     // 1. take a copy of existing state because you never want to mutate it
     const filters = {...this.state.filters}
     // 2. add our filter to our new filters variable
-    filters.agency = filter
+    filters.agency[filter] = value
     // 3. set the new fishes object to state
     this.setState({
       filters: filters
@@ -29,7 +28,7 @@ class App extends React.Component {
     {console.log(this.state)}
 
     return (
-      <Filters addFilter={this.addFilter} filterState={this.state.filters} />
+      <Filters addFilter={this.addFilter} agencyState={this.state.filters.agency} />
     )
   }
 }

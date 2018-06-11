@@ -3,8 +3,11 @@ import Agency from './filters/Agency';
 
 class Filters extends React.Component {
   handleChange = (e) => {
-    this.props.addFilter(e.target.value)
-    // this.setState({ filters: e.target.value})
+    const target = e.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.props.addFilter(name, value)
   }
   handleSubmit = (e) => {
     e.preventDefault();
@@ -12,16 +15,17 @@ class Filters extends React.Component {
   }
 
   render() {
-    {console.log(this.props.filterState)}
     return (
-      <form id="filters">
-        <input type="text" value='smd' onChange={this.handleChange} />
+      <form id="filters" onSubmit={this.handleSubmit}>
+        <Agency handleChange={this.handleChange} isChecked={this.props.agencyState} />
+      { /*
+        <input type="text" placeholder="smd" onChange={this.handleChange} />
         <input type="submit" value="Submit" />
-
+        <Agency addFilter={this.props.addFilter} /> */ }
       </form>
     )
   }
 }
 
 export default Filters;
-// <Agency addFilter={this.props.addFilter} />
+//
