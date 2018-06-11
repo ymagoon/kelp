@@ -10,7 +10,7 @@ class TrainingOrganization extends React.Component {
         <input name={agency}
                key={agency}
                type="checkbox"
-               checked={trainingOrganizations[agency] || false}
+               checked={trainingOrganizations[agency].checked || false}
                onChange={this.props.handleChange} />
       )
     });

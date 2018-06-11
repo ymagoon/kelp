@@ -18,6 +18,12 @@ class App extends React.Component {
   buildFilters = (filter, value) => {
     // take copy of existing filters
     const filters = {...this.state.filters}
+    // filters passed as 'PADI:true', changing to PADI: {checked: false, num: <number>}
+    console.log(filter);
+    // console.log(Object.keys(filters.training_organizations));
+    Object.keys(filter.training_organizations).forEach(key => {
+      filter.training_organizations[key] = {checked: false, total: filter.training_organizations[key]}
+    });
     // merge existing filters with new filters
     const newFilters = {...filters, ...filter}
 
@@ -31,7 +37,6 @@ class App extends React.Component {
     //     }
     // }
 
-
     this.setState({
       filters: newFilters
     });
@@ -40,7 +45,8 @@ class App extends React.Component {
   // Adds or removes a filter based on the user input
   addFilters = (filter, value) => {
     const filters = {...this.state.filters}
-    filters.training_organizations[filter] = value
+    console.log(filters.training_organizations[filter].checked);
+    filters.training_organizations[filter].checked = value
 
     this.setState({
       filters: filters
