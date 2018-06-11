@@ -7,26 +7,26 @@ class Filters extends React.Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    this.props.addFilter(name, value)
+    this.props.addFilters(name, value)
   }
   handleSubmit = (e) => {
     e.preventDefault();
     alert('this form was submitted');
   }
 
-  componentDidMount() {
-    console.log('mounted');
-    $.getJSON('/search', (response) => { this.props.addDiveCenters(response) });
-  }
+  // componentDidMount() {
+  //   console.log('mounted');
+  //   $.getJSON('/search', (response) => { this.props.addDiveCenters(response) });
+  // }
 // this.setState({ items: response })
   render() {
     return (
       <form id="filters" onSubmit={this.handleSubmit}>
-        <Agency handleChange={this.handleChange} isChecked={this.props.agencyState} />
+        <Agency handleChange={this.handleChange} trainingOrganizations={this.props.filters.training_organizations} isChecked={this.props.filters.training_organizations} />
       { /*
         <input type="text" placeholder="smd" onChange={this.handleChange} />
         <input type="submit" value="Submit" />
-        <Agency addFilter={this.props.addFilter} /> */ }
+        <Agency addFilters={this.props.addFilters} /> */ }
       </form>
     )
   }

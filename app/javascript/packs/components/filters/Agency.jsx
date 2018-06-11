@@ -2,18 +2,20 @@ import React, { Fragment } from 'react';
 
 class Agency extends React.Component {
   render() {
-    return (
-      <Fragment>
-        <input name="padi"
+    const trainingOrganizations = this.props.trainingOrganizations;
+
+    // Loop through the keys of each training organization and display a checkbox for each
+    const filters = Object.keys(trainingOrganizations).map((agency) => {
+      return (
+        <input name={agency}
+               key={agency}
                type="checkbox"
-               checked={this.props.isChecked['padi'] || false}
+               checked={trainingOrganizations[agency] || false}
                onChange={this.props.handleChange} />
-        <input name="ssi"
-               type="checkbox"
-               checked={this.props.isChecked['ssi'] || false}
-               onChange={this.props.handleChange} />
-      </Fragment>
-    )
+      )
+    });
+
+    return filters;
   }
 }
 

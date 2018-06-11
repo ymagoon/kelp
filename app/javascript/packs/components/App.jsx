@@ -6,7 +6,7 @@ class App extends React.Component {
   state = {
     centers: [],
     filters: {
-      agency: {},
+      training_organizations: {},
       rating: {},
       city: {},
       language: {},
@@ -14,12 +14,34 @@ class App extends React.Component {
     }
   };
 
-  addFilter = (filter, value) => {
-    // 1. take a copy of existing state because you never want to mutate it
+  // Builds filters when the page is first loaded
+  buildFilters = (filter, value) => {
+    // take copy of existing filters
     const filters = {...this.state.filters}
-    // 2. add our filter to our new filters variable
-    filters.agency[filter] = value
-    // 3. set the new fishes object to state
+    // merge existing filters with new filters
+    const newFilters = {...filters, ...filter}
+
+    // set everything to false
+    // for(let category in newFilters) {
+    //     if(newFilters.hasOwnProperty(category)){
+    //       console.log(category);
+    //       console.log(category.typeof);
+    //         // var foundLabel = findObjectByLabel(obj[i], label);
+    //         // if(foundLabel) { return foundLabel; }
+    //     }
+    // }
+
+
+    this.setState({
+      filters: newFilters
+    });
+  }
+
+  // Adds or removes a filter based on the user input
+  addFilters = (filter, value) => {
+    const filters = {...this.state.filters}
+    filters.training_organizations[filter] = value
+
     this.setState({
       filters: filters
     });
@@ -34,9 +56,16 @@ class App extends React.Component {
     });
   }
 
+  componentDidMount() {
+    $.getJSON('/search', (response) => {
+      this.addDiveCenters(response.centers)
+      this.buildFilters(response.filters, false)
+    });
+  }
+
   render() {
     return (
-      <Filters addFilter={this.addFilter} addDiveCenters={this.addDiveCenters} agencyState={this.state.filters.agency} />
+      <Filters addFilters={this.addFilters} addDiveCenters={this.addDiveCenters} filters={this.state.filters} />
     )
   }
 }
