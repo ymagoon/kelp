@@ -4,6 +4,7 @@ import Filters from './Filters';
 
 class App extends React.Component {
   state = {
+    centers: [],
     filters: {
       agency: {},
       rating: {},
@@ -24,11 +25,18 @@ class App extends React.Component {
     });
   }
 
-  render() {
-    {console.log(this.state)}
+  addDiveCenters = (newDiveCenters) => {
+    const diveCenters = {...this.state};
+    diveCenters.centers = newDiveCenters;
 
+    this.setState({
+      centers: diveCenters.centers
+    });
+  }
+
+  render() {
     return (
-      <Filters addFilter={this.addFilter} agencyState={this.state.filters.agency} />
+      <Filters addFilter={this.addFilter} addDiveCenters={this.addDiveCenters} agencyState={this.state.filters.agency} />
     )
   }
 }

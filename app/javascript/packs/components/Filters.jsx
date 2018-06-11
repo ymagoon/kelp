@@ -14,6 +14,11 @@ class Filters extends React.Component {
     alert('this form was submitted');
   }
 
+  componentDidMount() {
+    console.log('mounted');
+    $.getJSON('/search', (response) => { this.props.addDiveCenters(response) });
+  }
+// this.setState({ items: response })
   render() {
     return (
       <form id="filters" onSubmit={this.handleSubmit}>
