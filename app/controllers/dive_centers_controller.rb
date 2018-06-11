@@ -8,8 +8,7 @@ class DiveCentersController < ApplicationController
 
   def search
     search_term = params[:search].present? ? clean_search : ""
-    # @dive_centers = DiveCenter.search(search_term) # this needs to work for api call
-    @dive_centers = DiveCenter.includes(:training_organizations)
+    @dive_centers = DiveCenter.search search_term, includes: [:location, :training_organizations] # this needs to work for api call
 
     # instantiate query object
     query = QueryFilter.new(@dive_centers, permit_params)

@@ -1,5 +1,5 @@
 import React from 'react';
-import Agency from './filters/Agency';
+import TrainingOrganization from './filters/TrainingOrganization';
 
 class Filters extends React.Component {
   handleChange = (e) => {
@@ -14,19 +14,10 @@ class Filters extends React.Component {
     alert('this form was submitted');
   }
 
-  // componentDidMount() {
-  //   console.log('mounted');
-  //   $.getJSON('/search', (response) => { this.props.addDiveCenters(response) });
-  // }
-// this.setState({ items: response })
   render() {
     return (
       <form id="filters" onSubmit={this.handleSubmit}>
-        <Agency handleChange={this.handleChange} trainingOrganizations={this.props.filters.training_organizations} isChecked={this.props.filters.training_organizations} />
-      { /*
-        <input type="text" placeholder="smd" onChange={this.handleChange} />
-        <input type="submit" value="Submit" />
-        <Agency addFilters={this.props.addFilters} /> */ }
+        <TrainingOrganization handleChange={this.handleChange} trainingOrganizations={this.props.filters.training_organizations} />
       </form>
     )
   }

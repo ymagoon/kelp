@@ -57,7 +57,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    $.getJSON('/search', (response) => {
+    $.getJSON('/search?search=cebu', (response) => {
       this.addDiveCenters(response.centers)
       this.buildFilters(response.filters, false)
     });

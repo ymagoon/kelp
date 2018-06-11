@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-class Agency extends React.Component {
+class TrainingOrganization extends React.Component {
   render() {
     const trainingOrganizations = this.props.trainingOrganizations;
 
@@ -19,4 +19,4 @@ class Agency extends React.Component {
   }
 }
 
-export default Agency;
+export default TrainingOrganization;
