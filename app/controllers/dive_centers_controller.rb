@@ -7,16 +7,19 @@ class DiveCentersController < ApplicationController
   end
 
   def search
-    search_term = params[:search].present? ? clean_search : ""
-    @dive_centers = DiveCenter.search search_term, includes: [:location, :training_organizations] # this needs to work for api call
+    # Only gather data if its an AJAX call, otherwise render blank HTML
+    if request.format == 'application/json'
+      search_term = params[:search].present? ? clean_search : ""
+      @dive_centers = DiveCenter.search search_term, includes: [:location, :training_organizations] # this needs to work for api call
 
-    # instantiate query object
-    query = QueryFilter.new(@dive_centers, params)
+      # instantiate query object
+      query = QueryFilter.new(@dive_centers, params)
 
-    # filter based on parameters
-    @dive_centers = query.filter
+      # filter based on parameters
+      @dive_centers = query.filter
 
-    @training_organization_filters = query.build_training_organization_filters
+      @training_organization_filters = query.build_training_organization_filters
+    end
 
     respond_to do |format|
       format.html
@@ -27,7 +30,7 @@ class DiveCentersController < ApplicationController
           filters: {
             training_organizations: @training_organization_filters
           },
-          centers: @dive_centers #json_data
+          centers: @dive_centers
         }.to_json
       end
     end
@@ -54,5 +57,4 @@ class DiveCentersController < ApplicationController
   def clean_search
     params[:search].gsub(/[!@#$%^&*()\"\'\,\.\\]/,'')
   end
-
 end
