@@ -71,7 +71,7 @@ class App extends React.Component {
     return (
       <Fragment>
         <Filters addFilters={this.addFilters} addDiveCenters={this.addDiveCenters} filters={this.state.filters} />
-        <DiveCenterList />
+        <DiveCenterList diveCenters={this.state.centers} />
       </Fragment>
     )
   }
