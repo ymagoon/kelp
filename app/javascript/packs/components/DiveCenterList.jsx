@@ -6,7 +6,7 @@ class DiveCenterList extends React.Component {
     // Loop through the keys of each dive center and pass it to DiveCenter component
     const diveCenterList = Object.keys(this.props.diveCenters).map((dc) => {
       return (
-        <DiveCenter diveCenter={this.props.diveCenters[dc]} />
+        <DiveCenter key={this.props.diveCenters[dc].id} diveCenter={this.props.diveCenters[dc]} />
       )
     });
 
