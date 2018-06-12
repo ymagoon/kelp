@@ -42,8 +42,10 @@ class App extends React.Component {
     const filters = {...this.state.filters}
 
     // filters passed as 'PADI:<number>', changing to PADI: {checked: false, num: <number>}
-    Object.keys(filter.training_organizations).forEach(key => {
-      filter.training_organizations[key] = {checked: false, total: filter.training_organizations[key]}
+    Object.keys(filter).forEach((category) => {
+      Object.keys(filter[category]).forEach((item) => {
+        filter[category][item] = {checked: false, total: filter[category][item]}
+      });
     });
 
     // merge existing filters with new filters
@@ -55,9 +57,10 @@ class App extends React.Component {
   }
 
   // Adds or removes a filter based on the user input
-  addFilters = (filter, value, callback) => {
+  addFilters = (filter, category, value, callback) => {
     const filters = {...this.state.filters}
-    filters.training_organizations[filter].checked = value
+
+    filters[category][filter].checked = value
 
     this.setQueryParams(filter, value);
 

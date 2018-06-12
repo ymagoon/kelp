@@ -5,8 +5,11 @@ class QueryFilter
   end
 
   def build_training_organization_filters
-    # fix this! - needs to be done once all data between organizations is merged
-    @dive_centers.each_with_object(Hash.new(0)) { |obj, counts| counts[obj.training_organizations.first.short_name] += 1 }
+    count_by { |center| center.training_organizations.first.short_name }
+  end
+
+  def build_dive_center_type_filters
+    count_by { |center| center.dive_center_type }
   end
 
   def filter
@@ -24,5 +27,10 @@ class QueryFilter
 
     @dive_centers
   end
-end
 
+  private
+
+  def count_by
+    @dive_centers.each_with_object(Hash.new(0)) { |obj, h| h[yield(obj)] += 1 }
+  end
+end

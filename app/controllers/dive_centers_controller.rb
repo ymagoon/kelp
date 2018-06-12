@@ -19,6 +19,7 @@ class DiveCentersController < ApplicationController
       @dive_centers = query.filter
 
       @training_organization_filters = query.build_training_organization_filters
+      @dive_center_type_filters = query.build_dive_center_type_filters
     end
 
     respond_to do |format|
@@ -28,7 +29,8 @@ class DiveCentersController < ApplicationController
         # puts json_data
         render json: {
           filters: {
-            training_organizations: @training_organization_filters
+            training_organizations: @training_organization_filters,
+            dive_center_types: @dive_center_type_filters
           },
           centers: @dive_centers
         }.to_json
