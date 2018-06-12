@@ -11,20 +11,23 @@ class DiveCentersController < ApplicationController
     @dive_centers = DiveCenter.search search_term, includes: [:location, :training_organizations] # this needs to work for api call
 
     # instantiate query object
-    query = QueryFilter.new(@dive_centers, permit_params)
+    query = QueryFilter.new(@dive_centers, params)
+
+    # filter based on parameters
+    @dive_centers = query.filter
 
     @training_organization_filters = query.build_training_organization_filters
 
     respond_to do |format|
       format.html
       format.json do
-        json_data = @dive_centers.each { |dc| dc.as_json(include: :location)}
-        puts json_data
+        # json_data = @dive_centers.each { |dc| dc.as_json(include: :location)}
+        # puts json_data
         render json: {
           filters: {
             training_organizations: @training_organization_filters
           },
-          centers: json_data #@dive_centers
+          centers: @dive_centers #json_data
         }.to_json
       end
     end

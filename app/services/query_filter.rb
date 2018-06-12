@@ -10,6 +10,19 @@ class QueryFilter
   end
 
   def filter
-    @dive_centers = [@dive_centers.first]
+    if @params['PADI'].present? && @params['PADI'] == 'true'
+      @dive_centers = @dive_centers.select { |dc| dc.training_organizations.map(&:short_name).include? 'PADI' }
+    end
+
+    if @params['SDI'].present? && @params['SDI'] == 'true'
+      @dive_centers = @dive_centers.select { |dc| dc.training_organizations.map(&:short_name).include? 'SDI' }
+    end
+
+    if @params['SSI'].present? && @params['SSI'] == 'true'
+      @dive_centers = @dive_centers.select { |dc| dc.training_organizations.map(&:short_name).include? 'SSI' }
+    end
+
+    @dive_centers
   end
 end
+

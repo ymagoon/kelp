@@ -14,6 +14,10 @@ import 'typeahead';
 import './autocomplete';
 import Router from './components/Router';
 
+// find another way to do this without turning off caching. this makes another
+// request to the DB
+$.ajaxSetup({cache: false})
+
 if (document.querySelector('#test') != null) {
   render(<Router />, document.querySelector('#test'));
 }

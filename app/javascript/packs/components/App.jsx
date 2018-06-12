@@ -79,6 +79,17 @@ class App extends React.Component {
   componentDidMount() {
     this.setQueryParams();
 
+    // $.ajax({
+    //   dataType: "json",
+    //   url: `/search${this.props.location.search}`,
+    //   cache: false,
+    //   success: function (response) {
+    //     console.log(response.filters);
+    //     // this.addDiveCenters(response.centers)
+    //     this.buildFilters(response.filters, false)
+    //   }
+    // });
+
     $.getJSON(`/search${this.props.location.search}`, (response) => {
       this.addDiveCenters(response.centers)
       this.buildFilters(response.filters, false)
