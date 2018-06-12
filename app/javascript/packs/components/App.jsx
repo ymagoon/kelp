@@ -12,29 +12,40 @@ class App extends React.Component {
       city: {},
       language: {},
       misc: {}
-    }
+    },
+    query: ''
   };
+
+  // Set the query parameters on page load
+  setQueryParams = (param = null, value = null) => {
+    const query = this.state.query;
+    console.log(query);
+    // get current location
+    const location = this.props.location.search;
+
+    // Set params based on whether component mount or filter change
+    const params = param ? new URLSearchParams(query) : new URLSearchParams(location);
+
+    if (param) {
+      params.set(param, value);
+    }
+
+    this.setState({
+      query: params.toString()
+    });
+  }
 
   // Builds filters when the page is first loaded
   buildFilters = (filter, value) => {
-    // take copy of existing filters
     const filters = {...this.state.filters}
-    // filters passed as 'PADI:true', changing to PADI: {checked: false, num: <number>}
+
+    // filters passed as 'PADI:<number>', changing to PADI: {checked: false, num: <number>}
     Object.keys(filter.training_organizations).forEach(key => {
       filter.training_organizations[key] = {checked: false, total: filter.training_organizations[key]}
     });
+
     // merge existing filters with new filters
     const newFilters = {...filters, ...filter}
-
-    // set everything to false
-    // for(let category in newFilters) {
-    //     if(newFilters.hasOwnProperty(category)){
-    //       console.log(category);
-    //       console.log(category.typeof);
-    //         // var foundLabel = findObjectByLabel(obj[i], label);
-    //         // if(foundLabel) { return foundLabel; }
-    //     }
-    // }
 
     this.setState({
       filters: newFilters
@@ -49,8 +60,11 @@ class App extends React.Component {
     this.setState({
       filters: filters
     });
+
+    this.setQueryParams(filter, value);
   }
 
+  // Adds or removes a dive center from state
   addDiveCenters = (newDiveCenters) => {
     const diveCenters = {...this.state};
     diveCenters.centers = newDiveCenters;
@@ -65,6 +79,8 @@ class App extends React.Component {
       this.addDiveCenters(response.centers)
       this.buildFilters(response.filters, false)
     });
+
+    this.setQueryParams();
   }
 
   render() {
