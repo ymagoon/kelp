@@ -13,10 +13,7 @@ import { render } from 'react-dom';
 import 'typeahead';
 import './autocomplete';
 import Router from './components/Router';
-// import App from './components/App';
 
 if (document.querySelector('#test') != null) {
   render(<Router />, document.querySelector('#test'));
 }
-
-console.log('Hello World from Webpacker')

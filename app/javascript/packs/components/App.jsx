@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDom from 'react-dom';
 import Filters from './Filters';
+import DiveCenterList from './DiveCenterList';
 
 class App extends React.Component {
   state = {
@@ -19,8 +20,6 @@ class App extends React.Component {
     // take copy of existing filters
     const filters = {...this.state.filters}
     // filters passed as 'PADI:true', changing to PADI: {checked: false, num: <number>}
-    console.log(filter);
-    // console.log(Object.keys(filters.training_organizations));
     Object.keys(filter.training_organizations).forEach(key => {
       filter.training_organizations[key] = {checked: false, total: filter.training_organizations[key]}
     });
@@ -45,7 +44,6 @@ class App extends React.Component {
   // Adds or removes a filter based on the user input
   addFilters = (filter, value) => {
     const filters = {...this.state.filters}
-    console.log(filters.training_organizations[filter].checked);
     filters.training_organizations[filter].checked = value
 
     this.setState({
@@ -71,7 +69,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <Filters addFilters={this.addFilters} addDiveCenters={this.addDiveCenters} filters={this.state.filters} />
+      <Fragment>
+        <Filters addFilters={this.addFilters} addDiveCenters={this.addDiveCenters} filters={this.state.filters} />
+        <DiveCenterList />
+      </Fragment>
     )
   }
 }

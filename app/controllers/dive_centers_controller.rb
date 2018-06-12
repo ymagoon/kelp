@@ -18,11 +18,13 @@ class DiveCentersController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
+        json_data = @dive_centers.each { |dc| dc.as_json(include: :location)}
+        puts json_data
         render json: {
           filters: {
             training_organizations: @training_organization_filters
           },
-          centers: @dive_centers
+          centers: json_data #@dive_centers
         }.to_json
       end
     end
