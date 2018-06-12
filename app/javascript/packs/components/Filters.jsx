@@ -21,7 +21,6 @@ class Filters extends React.Component {
 
   render() {
     const filters = this.props.filters;
-    console.log(filters);
 
     return (
       <form id="filters" onSubmit={this.handleSubmit}>

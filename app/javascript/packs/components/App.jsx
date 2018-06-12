@@ -21,7 +21,7 @@ class App extends React.Component {
   }
 
   // Set the query parameters on page load
-  setQueryParams = (param = null, value = null) => {
+  setQueryParams = (param = null, value = null, category = null) => {
     const query = this.state.query;
     // get current location
     const location = this.props.location.search;
@@ -29,8 +29,21 @@ class App extends React.Component {
     // Set params based on whether component mount or filter change
     const params = param ? new URLSearchParams(query) : new URLSearchParams(location);
 
-    if (param) {
-      params.set(param, value);
+    // value must be equal to true
+    if (param && value) {
+      params.append(`${category}[]`, param);
+
+      // parameter exists but value is false
+    } else if (param && !value) {
+        const values = params.getAll(`${category}[]`).filter(category => category !== param);
+        console.log('removing filter');
+        console.log(values);
+        console.log(params.toString());
+        params.delete(`${category}[]`)
+        console.log(params.toString());
+        values.forEach((value) => {
+          params.append(`${category}[]`, value)
+        });
     }
 
     this.setState({
@@ -63,7 +76,7 @@ class App extends React.Component {
 
     filters[category][filter].checked = value
 
-    this.setQueryParams(filter, value);
+    this.setQueryParams(filter, value, category);
 
     this.setState({
       filters: filters
