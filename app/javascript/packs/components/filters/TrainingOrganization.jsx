@@ -11,8 +11,7 @@ class TrainingOrganization extends React.Component {
                key={agency}
                type="checkbox"
                checked={trainingOrganizations[agency].checked || false}
-               onChange={(e) => this.props.handleChange("training_organizations", e)}
-               data-category="training_organization" />
+               onChange={(e) => this.props.handleChange("training_organizations", e)} />
       )
     });
 

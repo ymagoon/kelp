@@ -10,6 +10,7 @@ class App extends React.Component {
       centers: [],
       filters: {
         training_organizations: {},
+        dive_center_types: {},
         rating: {},
         city: {},
         language: {},

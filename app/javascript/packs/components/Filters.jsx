@@ -1,5 +1,6 @@
 import React from 'react';
 import TrainingOrganization from './filters/TrainingOrganization';
+import DiveCenterType from './filters/DiveCenterType';
 
 class Filters extends React.Component {
   handleChange = (category, e) => {
@@ -19,9 +20,13 @@ class Filters extends React.Component {
   }
 
   render() {
+    const filters = this.props.filters;
+    console.log(filters);
+
     return (
       <form id="filters" onSubmit={this.handleSubmit}>
-        <TrainingOrganization handleChange={this.handleChange} trainingOrganizations={this.props.filters.training_organizations} />
+        <TrainingOrganization handleChange={this.handleChange} trainingOrganizations={filters.training_organizations} />
+        <DiveCenterType handleChange={this.handleChange} diveCenterTypes={filters.dive_center_types} />
       </form>
     )
   }
