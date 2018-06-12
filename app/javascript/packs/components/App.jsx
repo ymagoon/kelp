@@ -4,22 +4,24 @@ import Filters from './Filters';
 import DiveCenterList from './DiveCenterList';
 
 class App extends React.Component {
-  state = {
-    centers: [],
-    filters: {
-      training_organizations: {},
-      rating: {},
-      city: {},
-      language: {},
-      misc: {}
-    },
-    query: ''
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      centers: [],
+      filters: {
+        training_organizations: {},
+        rating: {},
+        city: {},
+        language: {},
+        misc: {}
+      },
+      query: ''
+    };
+  }
 
   // Set the query parameters on page load
   setQueryParams = (param = null, value = null) => {
     const query = this.state.query;
-    console.log(query);
     // get current location
     const location = this.props.location.search;
 
@@ -53,15 +55,15 @@ class App extends React.Component {
   }
 
   // Adds or removes a filter based on the user input
-  addFilters = (filter, value) => {
+  addFilters = (filter, value, callback) => {
     const filters = {...this.state.filters}
     filters.training_organizations[filter].checked = value
 
+    this.setQueryParams(filter, value);
+
     this.setState({
       filters: filters
-    });
-
-    this.setQueryParams(filter, value);
+    }, callback);
   }
 
   // Adds or removes a dive center from state
@@ -75,19 +77,21 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    $.getJSON('/search?search=cebu', (response) => {
+    this.setQueryParams();
+
+    $.getJSON(`/search${this.props.location.search}`, (response) => {
       this.addDiveCenters(response.centers)
       this.buildFilters(response.filters, false)
     });
-
-    this.setQueryParams();
   }
 
   render() {
     return (
       <Fragment>
-        <Filters addFilters={this.addFilters} addDiveCenters={this.addDiveCenters} filters={this.state.filters} />
-        <DiveCenterList diveCenters={this.state.centers} />
+        <Filters addFilters={this.addFilters} addDiveCenters={this.addDiveCenters} filters={this.state.filters} query={this.state.query} />
+        <div id="dc-container">
+          <DiveCenterList diveCenters={this.state.centers} />
+        </div>
       </Fragment>
     )
   }
