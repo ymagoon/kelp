@@ -1,16 +1,27 @@
-// Import Google fonts
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Raleway:400,100,300,700,500");
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300,400,700|Oswald:300,400,700');
+
+// These are not pulling in!?
+
+// @font-face {
+//   font-family: 'Merriweather-Regular';
+//   src: font-url('Merriweather/Merriweather-Regular.ttf') format('truetype');
+// }
+// $merriweather-regular: "Merriweather-Regular";
+
+// @font-face {
+//   font-family: 'Merriweather-Light';
+//   src: font-url('Merriweather/Merriweather-Light.ttf') format('truetype');
+// }
+// $merriweather-light: "Merriweather-Light";
+
+// @font-face {
+//   font-family: 'Oswald-Light';
+//   src: font-url('Oswald/Oswald-Light.ttf') format('truetype');
+// }
+// $oswald-light: "Oswald-Light";
 
 // Define fonts for body and headers
-$body-font: "Open Sans", "Helvetica", "sans-serif";
-$headers-font: "Raleway", "Helvetica", "sans-serif";
-
-// To use a font file (.woff) uncomment following lines
-// @font-face {
-//   font-family: "Font Name";
-//   src: font-url('FontFile.eot');
-//   src: font-url('FontFile.eot?#iefix') format('embedded-opentype'),
-//        font-url('FontFile.woff') format('woff'),
-//        font-url('FontFile.ttf') format('truetype')
-// }
-// $my-font: "Font Name";
+// $body-font: "Merriweather", "Helvetica", "sans-serif";
+$body-font: "Helvetica", "sans-serif";
+$headers-font: "Oswald", "Helvetica", "sans-serif";
+$headings-font-weight: 300;

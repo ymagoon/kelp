@@ -7,4 +7,17 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-console.log('Hello World from Webpacker')
+import React from 'react';
+import { render } from 'react-dom';
+
+import 'typeahead';
+import './autocomplete';
+import Router from './components/Router';
+
+// find another way to do this without turning off caching. this makes another
+// request to the DB
+$.ajaxSetup({cache: false})
+
+if (document.querySelector('#test') != null) {
+  render(<Router />, document.querySelector('#test'));
+}

@@ -2,11 +2,15 @@
   "name": "kelp",
   "private": true,
   "dependencies": {
+    "@appbaseio/reactivesearch": "^2.6.6",
     "@rails/webpacker": "3.5",
     "babel-preset-react": "^6.24.1",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
-    "react-dom": "^16.4.0"
+    "react-dom": "^16.4.0",
+    "react-router-dom": "^4.3.1",
+    "react-transition-group": "^2.3.1",
+    "typeahead": "^0.2.2"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"

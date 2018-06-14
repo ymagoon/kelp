@@ -1,5 +1,3 @@
-require 'pry'
-
 EMAIL_EXPRESSION = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 URL_EXPRESSION = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})/
 
@@ -109,4 +107,20 @@ def open_parse_json(file_path)
   parsed_json = JSON.parse(raw_json)
 
   parsed_json
+end
+
+# This method can be manually run to update all countries, it is by no means efficienct, but it works!
+def update_padi_countries
+  countries = open_parse_json('db/data/countries.json')
+  locations = Location.where(source: 'PADI')
+
+  locations.each do |loc|
+    countries.each do |c|
+      if c['padi']
+        if c['padi'].include? loc.country
+          loc.update(country: c['name']['common'])
+        end
+      end
+    end
+  end
 end

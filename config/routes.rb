@@ -3,6 +3,12 @@ Rails.application.routes.draw do
   devise_for :users
 
   root 'pages#home'
-  resources :dive_center, only: [:index, :show]
-  # get 'search', to: 'pages#search', as: :search
+
+  resources :dive_centers, only: [:index, :show] do
+    collection do
+      get :autocomplete
+    end
+  end
+
+  get 'search', to: 'dive_centers#search'
 end
