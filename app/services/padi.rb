@@ -1,0 +1,3 @@
+class Padi < ManageDiveCenters
+
+end

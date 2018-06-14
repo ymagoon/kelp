@@ -1,0 +1,3 @@
+class Sdi < ManageDiveCenters
+
+end
