@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_08_070551) do
+ActiveRecord::Schema.define(version: 2018_06_13_081549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,15 +109,15 @@ ActiveRecord::Schema.define(version: 2018_06_08_070551) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "hours_of_operation"
-    t.boolean "rent_equipment"
+    t.boolean "rent_equipment", default: false
     t.boolean "rent_camera"
-    t.boolean "nitrox"
-    t.boolean "rent_computer"
-    t.boolean "lodging"
-    t.boolean "restaurant"
-    t.boolean "bar"
-    t.boolean "transfers"
-    t.boolean "pool"
+    t.boolean "nitrox", default: false
+    t.boolean "rent_computer", default: false
+    t.boolean "lodging", default: false
+    t.boolean "restaurant", default: false
+    t.boolean "bar", default: false
+    t.boolean "transfers", default: false
+    t.boolean "pool", default: false
     t.index ["location_id"], name: "index_dive_centers_on_location_id"
     t.index ["name"], name: "index_dive_centers_on_name"
   end

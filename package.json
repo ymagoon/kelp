@@ -2,6 +2,7 @@
   "name": "kelp",
   "private": true,
   "dependencies": {
+    "@appbaseio/reactivesearch": "^2.6.6",
     "@rails/webpacker": "3.5",
     "babel-preset-react": "^6.24.1",
     "prop-types": "^15.6.1",

@@ -4,6 +4,30 @@ class QueryFilter
     @params = params
   end
 
+  # def search_query
+  #    {
+  #     "size": 50,
+  #     "query": {
+  #       "function_score": {
+  #         "query": {
+  #           "match": {
+  #             "_all": {
+  #               "query": query,
+  #               "operator": "and",
+  #             }
+  #           }
+  #         },
+  #         "functions": [
+  #           {
+  #             "filter": { "term": { "_type": "house" }},
+  #             "weight": 5_000
+  #           }
+  #         ]
+  #       }
+  #     }
+  #   }
+  # end
+
   def build_training_organization_filters
     count_by { |center| center.training_organizations.first.short_name }
   end

@@ -10,7 +10,7 @@ class DiveCentersController < ApplicationController
     # Only gather data if its an AJAX call, otherwise render blank HTML
     if request.format == 'application/json'
       search_term = params[:search].present? ? clean_search : ""
-      @dive_centers = DiveCenter.search search_term, includes: [:location, :training_organizations] # this needs to work for api call
+      @dive_centers = DiveCenter.search search_term, fields: [:name, :city, :state, :country]
 
       # instantiate query object
       query = QueryFilter.new(@dive_centers, params)
@@ -44,10 +44,10 @@ class DiveCentersController < ApplicationController
 
   def autocomplete
     render json: DiveCenter.search(params[:query], {
-      fields: ['name'],
+      fields: ['name', 'city', 'state', 'country'],
       limit: 10,
       load: false
-      }).map(&:name)
+      })
   end
 
   private
