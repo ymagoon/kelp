@@ -49,125 +49,94 @@ class DiveCenter < ApplicationRecord
              },
              merge_mappings: true,
              mappings: {
-               dive_centers: {
-                 _all: {
-                   analyzer: "nGram_analyzer",
-                   search_analyzer: "whitespace_analyzer"
-                 },
-                 properties: {
-                   name: {
-                     type: "text",
-                   },
-                   dive_center_type: {
-                     type: "keyword",
-                   },
-                   rent_equipment: {
-                     type: "boolean",
-                   }
-             #       nitrox: {
-             #         type: "boolean",
-             #       },
-             #       rent_computer: {
-             #         type: "boolean",
-             #       },
-             #       lodging: {
-             #         type: "boolean",
-             #       },
-             #       restaurant: {
-             #         type: "boolean",
-             #       },
-             #       bar: {
-             #         type: "boolean",
-             #       },
-             #       transfers: {
-             #         type: "boolean",
-             #       },
-             #       pool: {
-             #         type: "boolean",
-             #       }
-             #       primary_phone: {
-             #         type: "text",
-             #         index: false
-             #         include_in_all: false
-             #       },
-             #       mobile_phone: {
-             #         type: "text",
-             #         index: false
-             #         include_in_all: false
-             #       },
-             #       website: {
-             #         type: "text",
-             #         index: false
-             #         include_in_all: false
-             #       },
-             #       email: {
-             #         type: "text",
-             #         index: false
-             #         include_in_all: false
-             #       },
-             #       fax: {
-             #         type: "text",
-             #         index: false
-             #         include_in_all: false
-             #       },
-             #       tripadvisor: {
-             #         type: "text",
-             #         index: false
-             #         include_in_all: false
-             #       },
-             #       fb: {
-             #         type: "text",
-             #         index: false
-             #         include_in_all: false
-             #       },
-             #       twitter: {
-             #         type: "text",
-             #         index: false
-             #         include_in_all: false
-             #       },
-             #       youtube: {
-             #         type: "text",
-             #         index: false
-             #         include_in_all: false
-             #       },
-             #       google: {
-             #         type: "text",
-             #         index: false
-             #         include_in_all: false
-             #       },
-             #       linkedin: {
-             #         type: "text",
-             #         index: false
-             #         include_in_all: false
-             #       },
-             #       blog: {
-             #         type: "text",
-             #         index: false
-             #         include_in_all: false
-             #       },
-             #       project_aware: {
-             #         type: "text",
-             #         index: false
-             #         include_in_all: false
-             #       },
-             #       created_at: {
-             #         type: "date",
-             #         index: false
-             #         include_in_all: false
-             #       },
-             #       updated_at: {
-             #         type: "date",
-             #         index: false
-             #         include_in_all: false
-             #       },
-             #       hours_of_operation: {
-             #         type: "text",
-             #         index: false
-             #         include_in_all: false
-             #       },
-                 }
+               dive_center: {
+                  dynamic_templates:[
+                     {
+                        string_template: {
+                           match: "*",
+                           match_mapping_type: "string",
+                           mapping: {
+                              "fields": {
+                              },
+                              ignore_above: 30000,
+                              type: "keyword"
+                           }
+                        }
+                     }
+                  ],
+                  properties: {
+                     bar: {
+                        "type": "boolean"
+                     },
+                     city: {
+                        type: "keyword",
+                        fields: {
+                           analyzed: {
+                              type: "text",
+                              analyzer: "nGram_analyzer",
+                              search_analyzer: "whitespace_analyzer"
+                           }
+                        },
+                        ignore_above: 30000
+                     },
+                     country: {
+                        type: "keyword",
+                        fields: {
+                           analyzed: {
+                              type: "text",
+                              analyzer: "nGram_analyzer",
+                              search_analyzer: "whitespace_analyzer"
+                           }
+                        },
+                        ignore_above: 30000
+                     },
+                     dive_center_type: {
+                        type: "keyword",
+                        ignore_above: 30000
+                     },
+                     lodging: {
+                        type: "boolean"
+                     },
+                     name: {
+                        type: "keyword",
+                        fields: {
+                           analyzed: {
+                              type: "text",
+                              analyzer: "nGram_analyzer",
+                              search_analyzer: "whitespace_analyzer"
+                           }
+                        },
+                        ignore_above: 30000
+                     },
+                     nitrox: {
+                        type: "boolean"
+                     },
+                     pool: {
+                        type: "boolean"
+                     },
+                     rent_equipment: {
+                        type: "boolean"
+                     },
+                     restaurant: {
+                        type: "boolean"
+                     },
+                     state: {
+                        type: "keyword",
+                        fields: {
+                           analyzed: {
+                              type: "text",
+                              analyzer: "nGram_analyzer",
+                              search_analyzer: "whitespace_analyzer"
+                           }
+                        },
+                        ignore_above: 30000
+                     },
+                     transfers: {
+                       type: "boolean"
+                     }
+                  }
                }
-             }
+            }
 
                # def search_data
   #   {
