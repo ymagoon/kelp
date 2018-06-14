@@ -1,0 +1,3 @@
+class ScrapePadi < DiveCenterScrape
+
+end

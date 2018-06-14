@@ -1,0 +1,3 @@
+class ScrapeSsi < DiveCenterScrape
+
+end
