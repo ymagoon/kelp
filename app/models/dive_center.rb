@@ -165,6 +165,9 @@ class DiveCenter < ApplicationRecord
   #   }
   # end
 
+  scope :unverified, -> { where(verified: 0) }
+  scope :user_verified, -> { where(verified: 1) }
+
   def ssi?
     agencies = self.training_organizations
     agencies.each { |agency| return true if agency.short_name == 'SSI' }

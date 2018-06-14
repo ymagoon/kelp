@@ -1,6 +1,9 @@
 class DiveCentersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :autocomplete, :search]
 
+  before_action :set_dive_center, only: [:show, :edit, :update]
+  before_action :set_location, only: [:update]
+
   def index
     search = params[:search].present? ? params[:search] : nil
     @dive_centers = DiveCenter.search(search)
@@ -39,7 +42,21 @@ class DiveCentersController < ApplicationController
   end
 
   def show
-    @dive_center = DiveCenter.find(params[:id])
+  end
+
+  def edit
+  end
+
+  def update
+    puts "----------------------"
+    puts @location
+
+    if @dive_center.update(permit_validated_data)
+      # @dive.center.update(verified: 1)
+      redirect_to validate_dive_centers_path
+    else
+      render 'edit'
+    end
   end
 
   def autocomplete
@@ -50,13 +67,34 @@ class DiveCentersController < ApplicationController
       })
   end
 
+  def validate
+    @dive_centers = DiveCenter.unverified.includes(:location)
+  end
+
   private
 
   def permit_params
     params.require(:filter).permit(:agency, :city) unless params[:filter].nil?
   end
 
+  def permit_validated_data
+    params.require(:dive_center).permit(:name, :primary_phone,
+                                        :mobile_phone, :website,
+                                        :email, :fax, :tripadvisor,
+                                        :fb, :twitter, :youtube,
+                                        :google, :linkedin, :blog,
+                                        :project_aware)
+  end
+
   def clean_search
     params[:search].gsub(/[!@#$%^&*()\"\'\,\.\\]/,'')
+  end
+
+  def set_dive_center
+    @dive_center = DiveCenter.find(params[:id])
+  end
+
+  def set_location
+    @location = @dive_center.location
   end
 end

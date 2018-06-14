@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_13_081549) do
+ActiveRecord::Schema.define(version: 2018_06_14_105729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,9 @@ ActiveRecord::Schema.define(version: 2018_06_13_081549) do
     t.boolean "bar", default: false
     t.boolean "transfers", default: false
     t.boolean "pool", default: false
+    t.integer "verified"
+    t.string "ig"
+    t.string "pinterest"
     t.index ["location_id"], name: "index_dive_centers_on_location_id"
     t.index ["name"], name: "index_dive_centers_on_name"
   end

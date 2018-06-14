@@ -4,9 +4,10 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
-  resources :dive_centers, only: [:index, :show] do
+  resources :dive_centers, only: [:index, :show, :edit, :update] do
     collection do
       get :autocomplete
+      get :validate, as: :validate
     end
   end
 

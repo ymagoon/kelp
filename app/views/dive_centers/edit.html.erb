@@ -1,0 +1,59 @@
+<div class="edit-page">
+  <%= simple_form_for @dive_center do |f| %>
+    <%= f.input :name %>
+    <%= f.input :website %>
+    <%= f.input :primary_phone %>
+    <%= f.input :mobile_phone %>
+    <%= f.input :email %>
+    <%= f.input :hours_of_operation %>
+    <%= f.input :fax %>
+    <%= f.input :tripadvisor %>
+    <%= f.input :fb %>
+    <%= f.input :ig %>
+    <%= f.input :pinterest %>
+    <%= f.input :twitter %>
+    <%= f.input :youtube %>
+    <%= f.input :google %>
+    <%= f.input :linkedin %>
+    <%= f.input :blog %>
+    <%= f.input :project_aware %>
+    <%= f.input :address_1, input_html: { value: @dive_center.location.address_1 } %>
+    <%= f.input :address_2, input_html: { value: @dive_center.location.address_2 } %>
+    <%= f.input :city, input_html: { value: @dive_center.location.city } %>
+    <%= f.input :state, input_html: { value: @dive_center.location.state } %>
+    <%= f.input :postal_code, input_html: { value: @dive_center.location.postal_code } %>
+    <%= f.button :submit %>
+  <% end %>
+</div>
+
+<%= @dive_center.name %>
+
+<!--
+    t.string "email", default: ""
+    t.string "fax", default: ""
+    t.string "tripadvisor", default: ""
+    t.string "fb", default: ""
+    t.string "twitter", default: ""
+    t.string "youtube", default: ""
+    t.string "google", default: ""
+    t.string "linkedin", default: ""
+    t.string "blog", default: ""
+    t.string "project_aware", default: ""
+    t.string "dive_center_type"
+    t.bigint "location_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "hours_of_operation"
+    t.boolean "rent_equipment", default: false
+    t.boolean "rent_camera"
+    t.boolean "nitrox", default: false
+    t.boolean "rent_computer", default: false
+    t.boolean "lodging", default: false
+    t.boolean "restaurant", default: false
+    t.boolean "bar", default: false
+    t.boolean "transfers", default: false
+    t.boolean "pool", default: false
+    t.integer "verified"
+    t.index ["location_id"], name: "index_dive_centers_on_location_id"
+    t.index ["name"], name: "index_dive_centers_on_name"
+  end -->

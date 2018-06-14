@@ -1,0 +1,9 @@
+<div class="validate">
+  <ol>
+    <% @dive_centers.each do |dc| %>
+      <li>
+        <%= link_to dc.name,  edit_dive_center_path(dc) %>
+      </li>
+    <% end %>
+  </ol>
+</div>
