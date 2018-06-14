@@ -2,16 +2,16 @@ class Location < ApplicationRecord
   belongs_to :training_organization, optional: true
   belongs_to :dive_center, optional: true
 
-  after_commit :reindex_dive_centers
-  searchkick searchable: [:city, :state, :country]
+  # after_commit :reindex_dive_centers
+  # searchkick searchable: [:city, :state, :country]
 
-   def search_data
-    {
-      city: city,
-      state: state,
-      country: country
-    }
-  end
+  #  def search_data
+  #   {
+  #     city: city,
+  #     state: state,
+  #     country: country
+  #   }
+  # end
 
   # FIX ME!!! right now, location.dive_center is not working??? SO reindex everything, unfortuntaely.
   def reindex_dive_centers

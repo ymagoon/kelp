@@ -11,7 +11,7 @@ class DiveCenter < ApplicationRecord
   validates :fb, :twitter, :youtube, :google, :linkedin, allow_blank: true, format: { with: url_expression }
   validates :email, allow_blank: true, format: { with: email_expression }
 
-  searchkick
+  # searchkick
   # searchkick  settings: {
   #               analysis: {
   #                  filter: {
@@ -147,23 +147,23 @@ class DiveCenter < ApplicationRecord
   #   )
   # end
 
-  def search_data
-    {
-      name: name,
-      dive_center_type: dive_center_type,
-      rent_equipment: rent_equipment,
-      nitrox: nitrox,
-      rent_computer: rent_computer,
-      lodging: lodging,
-      restaurant: restaurant,
-      bar: bar,
-      transfers: transfers,
-      pool: pool,
-      city: location.city,
-      state: location.state,
-      country: location.country
-    }
-  end
+  # def search_data
+  #   {
+  #     name: name,
+  #     dive_center_type: dive_center_type,
+  #     rent_equipment: rent_equipment,
+  #     nitrox: nitrox,
+  #     rent_computer: rent_computer,
+  #     lodging: lodging,
+  #     restaurant: restaurant,
+  #     bar: bar,
+  #     transfers: transfers,
+  #     pool: pool,
+  #     city: location.city,
+  #     state: location.state,
+  #     country: location.country
+  #   }
+  # end
 
   def ssi?
     agencies = self.training_organizations
