@@ -44,7 +44,7 @@ class DiveCentersController < ApplicationController
 
   def autocomplete
     render json: DiveCenter.search(params[:query], {
-      fields: ['name', 'city', 'state', 'country'],
+      fields: ['city', 'state', 'country'],
       limit: 10,
       load: false
       })

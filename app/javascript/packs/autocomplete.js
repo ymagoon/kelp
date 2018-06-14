@@ -5,10 +5,10 @@ $(document).ready(function(){
     limit: 5,
     remote: {
       url: '/dive_centers/autocomplete?query=%QUERY',
-      wildcard: '%QUERY'
-      // transform: (response) => {
-      //   console.log(response);
-      // }
+      wildcard: '%QUERY',
+      transform: (response) => {
+        console.log(response);
+      }
     }
   });
 
