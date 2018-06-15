@@ -7,27 +7,8 @@ class Main extends React.Component {
     return (
       <div className="main-container">
         <ReactiveBase
-          app="dive_centers_development_20180614092903944"
-          // app="MovieAppFinal"
-          // credentials="RxIAbH9Jc:6d3a5016-5e9d-448f-bd2b-63c80b401484"
+          app="dive_centers_development_20180614135556568"
           url="http://localhost:9200"
-          // headers={{
-          //   'Access-Control-Allow-Origin': '*'
-          // }}
-          theme={{
-            typography: {
-               fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif',fontSize: "16px"
-            },
-            colors: {
-              textColor: "black",
-              backgroundColor: "#212121",
-              primaryTextColor: "#fff",
-              primaryColor: "#2196F3",
-              titleColor: "#fff",
-              alertColor: "#d9534f",
-              borderColor: "#666"
-            }
-          }}
          >
           <DataSearch
             componentId="mainSearch"
